@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>NOME_LOJA - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            color: #333;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 230px;
+            height: 100vh;
+            background: #1f7a4c;
+            position: fixed;
+            padding: 20px;
+            color: white;
+            overflow: auto;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .menu a {
+            display: block;
+            color: #e8f5ec;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        .menu a:hover {
+            background: #145c36;
+        }
+
+        /* MAIN */
+        .main {
+            margin-left: 250px;
+            padding: 30px;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 5px;
+            color: #1f7a4c;
+        }
+
+        .header p {
+            color: #666;
+        }
+
+        /* BUSCA */
+        .search {
+            width: 60%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-top: 15px;
+            font-size: 15px;
+        }
+
+        .search:focus {
+            outline: 2px solid #1f7a4c;
+            border-color: transparent;
+        }
+
+        /* CARDS DE AÇÃO RÁPIDA */
+        .cards {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            flex: 1;
+            min-width: 250px;
+            background: #e8f5ec;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #cce5d5;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .card:hover {
+            background: #d6efe1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .card h3 {
+            color: #1f7a4c;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .card p {
+            color: #4a6b5a;
+            line-height: 1.4;
+        }
+
+        /* ESTATÍSTICAS */
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            flex: 1;
+            min-width: 200px;
+            background: #f4fbf7;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #d6efe1;
+        }
+
+        .stat h4 {
+            color: #4d6b5c;
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .stat .value {
+            font-size: 32px;
+            color: #1f7a4c;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .stat .detail {
+            display: block;
+            color: #6f8b7c;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        /* ALERTAS E AVISOS */
+        .alerts {
+            margin-top: 40px;
+            background: #fef8e7;
+            border-left: 5px solid #e6a017;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .alerts h3 {
+            color: #a36f0a;
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .alert-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .alert-item {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ffe5b4;
+        }
+
+        .alert-item strong {
+            color: #b95b0d;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .alert-item p {
+            color: #5a4a2e;
+            margin: 0;
+        }
+
+        /* ACESSOS RÁPIDOS */
+        .quick-access {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .quick-link {
+            background: white;
+            border: 1px solid #d6efe1;
+            padding: 12px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            color: #1f7a4c;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .quick-link:hover {
+            background: #1f7a4c;
+            color: white;
+            border-color: #1f7a4c;
+        }
+
+        /* FILIAIS */
+        .filial-info {
+            background: #e0f0e6;
+            padding: 12px 20px;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            color: #145c36;
+            font-weight: 500;
+        }
+
+        .filial-info span {
+            background: #1f7a4c;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="logo">🏪 NOME_LOJA</div>
+    <div class="menu">
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="relatorios.html">📈 Relatórios</a>
+        <a href="usuarios.html">👤 Usuários</a>
+        <a href="clientes.html">👥 Clientes</a>
+        <a href="funcionarios.html">🧑 Funcionários</a>
+        <a href="produtos.html">📦 Produtos</a>
+        <a href="estoque.html">🏬 Estoque</a>
+        <a href="lembretes.html">🔔 Lembretes</a>
+        <a href="financeiro.html">💰 Financeiro</a>
+        <a href="servicos.html">🛠 Serviços</a>
+        <a href="configuracoes.html">⚙ Configurações</a>
+        <a href="suporte.html">🎧 Suporte</a>
+    </div>
+</div>
+
+<div class="main">
+    <div class="header">
+        <h1>📊 Dashboard</h1>
+        <p>Olá, seu João! Acompanhe o movimento da loja hoje.</p>
+        <div class="filial-info">
+            📍 Matriz - Centro
+            <span>Loja ativa</span>
+        </div>
+        <input class="search" type="text" placeholder="🔍 Buscar produto, cliente ou pedido...">
+    </div>
+
+    <!-- Cards de ação rápida -->
+    <div class="cards">
+        <div class="card" onclick="window.location.href='#'">
+            <h3>🛒 Registrar venda</h3>
+            <p>Produtos ou serviços da sua loja.</p>
+        </div>
+        <div class="card" onclick="window.location.href='produtos.html'">
+            <h3>📦 Ver produtos</h3>
+            <p>Conferir preços, estoque e cadastrar novos.</p>
+        </div>
+        <div class="card" onclick="window.location.href='clientes.html'">
+            <h3>👥 Clientes</h3>
+            <p>Cadastro de clientes e histórico de compras.</p>
+        </div>
+    </div>
+
+    <!-- Indicadores principais -->
+    <div class="stats">
+        <div class="stat">
+            <h4>💰 Vendas de hoje</h4>
+            <div class="value">R$ 876,50</div>
+            <span class="detail">23 vendas · movimento da manhã</span>
+        </div>
+
+        <div class="stat">
+            <h4>📦 Estoque atual</h4>
+            <div class="value">1.023</div>
+            <span class="detail">itens no total · 8 com estoque baixo</span>
+        </div>
+
+        <div class="stat">
+            <h4>👥 Clientes cadastrados</h4>
+            <div class="value">157</div>
+            <span class="detail">desde a abertura da loja</span>
+        </div>
+
+        <div class="stat">
+            <h4>💳 Caixa do dia</h4>
+            <div class="value">R$ 2.210,00</div>
+            <span class="detail">entradas - saídas</span>
+        </div>
+    </div>
+
+    <!-- Alertas genéricos (aplicáveis a qualquer tipo de loja) -->
+    <div class="alerts">
+        <h3>🔔 Atenção - Lembretes da loja</h3>
+        <div class="alert-items">
+            <div class="alert-item">
+                <strong>📦 Reposição necessária</strong>
+                <p>5 produtos estão com estoque abaixo do mínimo.</p>
+            </div>
+            <div class="alert-item">
+                <strong>📅 Pedido pendente</strong>
+                <p>Pedido #123 aguardando confirmação do fornecedor.</p>
+            </div>
+            <div class="alert-item">
+                <strong>👥 Clientes</strong>
+                <p>3 clientes com pagamento pendente (fiado).</p>
+            </div>
+            <div class="alert-item">
+                <strong>💰 Contas a vencer</strong>
+                <p>2 contas vencem nos próximos 3 dias.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Atalhos úteis -->
+    <div class="quick-access">
+        <a href="#" class="quick-link">📦 Fazer pedido</a>
+        <a href="#" class="quick-link">📊 Fechamento do dia</a>
+        <a href="#" class="quick-link">📋 Conferir estoque</a>
+        <a href="#" class="quick-link">💰 Conferir caixa</a>
+    </div>
+
+    <!-- Rodapé -->
+    <div style="margin-top: 30px; font-size: 13px; color: #aaa; text-align: center; border-top: 1px dashed #ccc; padding-top: 15px;">
+        ⏱️ Última atualização: hoje, 10:23 · Matriz
+    </div>
+</div>
+
+<!-- Script simples para navegação -->
+<script>
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            const link = this.getAttribute('onclick')?.match(/'([^']+)'/)?.[1];
+            if (link && link !== '#') {
+                window.location.href = link;
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

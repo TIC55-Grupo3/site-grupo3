@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>NOME_LOJA - Usuários</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { margin:0; font-family:Arial, Helvetica, sans-serif; background:#ffffff; color:#333; }
+        .sidebar { width:230px; height:100vh; background:#1f7a4c; position:fixed; padding:20px; color:white; overflow:auto; }
+        .logo { font-size:22px; font-weight:bold; margin-bottom:30px; }
+        .menu a { display:block; color:#e8f5ec; text-decoration:none; padding:12px; border-radius:6px; margin-bottom:6px; font-size:15px; }
+        .menu a:hover { background:#145c36; }
+        .main { margin-left:250px; padding:30px; }
+        .header h1 { font-size:30px; color:#1f7a4c; }
+        .header p { color:#666; }
+        .button { margin-top:15px; background:#1f7a4c; color:white; border:none; padding:10px 18px; border-radius:6px; cursor:pointer; }
+        .button:hover { background:#145c36; }
+        .table { margin-top:30px; border:1px solid #ddd; border-radius:10px; overflow:hidden; }
+        table { width:100%; border-collapse:collapse; }
+        th, td { padding:12px; border-bottom:1px solid #eee; text-align:left; }
+        th { background:#f4fbf7; color:#1f7a4c; }
+        .permissions { margin-top:30px; display:flex; gap:20px; flex-wrap:wrap; }
+        .permission-card { flex:1; min-width:260px; background:#f4fbf7; padding:20px; border-radius:10px; border:1px solid #d6efe1; }
+        .permission-card h3 { margin-top:0; color:#1f7a4c; }
+        .permission-card label { display:block; margin-top:10px; }
+        .status-active { color:#27ae60; font-weight:bold; }
+        .status-blocked { color:#d9534f; font-weight:bold; }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <div class="logo">🏪 NOME_LOJA</div>
+    <div class="menu">
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="relatorios.html">📈 Relatórios</a>
+        <a href="usuarios.html">👤 Usuários</a>
+        <a href="clientes.html">👥 Clientes</a>
+        <a href="funcionarios.html">🧑 Funcionários</a>
+        <a href="produtos.html">📦 Produtos</a>
+        <a href="estoque.html">🏬 Estoque</a>
+        <a href="lembretes.html">🔔 Lembretes</a>
+        <a href="financeiro.html">💰 Financeiro</a>
+        <a href="servicos.html">🛠 Serviços</a>
+        <a href="configuracoes.html">⚙ Configurações</a>
+        <a href="suporte.html">🎧 Suporte</a>
+    </div>
+</div>
+<div class="main">
+    <div class="header">
+        <h1>👤 Usuários do sistema</h1>
+        <p>Gerencie quem tem acesso ao sistema</p>
+        <button class="button">+ Adicionar usuário</button>
+    </div>
+    <div class="table">
+        <table>
+            <tr><th>Nome</th><th>Perfil</th><th>Loja</th><th>Status</th><th>Ações</th></tr>
+            <tr><td>Patrick</td><td>Super Administrador</td><td>Todas</td><td class="status-active">Ativo</td><td>Editar</td></tr>
+            <tr><td>João</td><td>Administrador</td><td>Matriz</td><td class="status-active">Ativo</td><td>Editar</td></tr>
+            <tr><td>Maria</td><td>Funcionário</td><td>Matriz</td><td class="status-active">Ativo</td><td>Editar</td></tr>
+            <tr><td>Carlos</td><td>Funcionário</td><td>Filial</td><td class="status-blocked">Bloqueado</td><td>Editar</td></tr>
+        </table>
+    </div>
+    <div class="permissions">
+        <div class="permission-card">
+            <h3>🔑 Permissões para funcionários</h3>
+            <label><input type="checkbox"> Permitir dar desconto</label>
+            <label><input type="checkbox"> Permitir ajustar estoque</label>
+            <label><input type="checkbox"> Permitir cadastrar produtos</label>
+            <label><input type="checkbox"> Permitir ver relatórios</label>
+        </div>
+        <div class="permission-card">
+            <h3>🔒 Controle de acesso</h3>
+            <label><input type="checkbox"> Acesso ao sistema</label>
+            <label><input type="checkbox"> Bloquear usuário</label>
+            <label><input type="checkbox"> Resetar senha</label>
+            <label><input type="checkbox"> Acesso a todas as lojas</label>
+        </div>
+    </div>
+</div>
+</body>
+</html>

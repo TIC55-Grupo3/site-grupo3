@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>NOME_LOJA - Configurações</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            color: #333;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 230px;
+            height: 100vh;
+            background: #1f7a4c;
+            position: fixed;
+            padding: 20px;
+            color: white;
+            overflow: auto;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .menu a {
+            display: block;
+            color: #e8f5ec;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        .menu a:hover {
+            background: #145c36;
+        }
+
+        /* MAIN */
+        .main {
+            margin-left: 250px;
+            padding: 30px;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 30px;
+            color: #1f7a4c;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #666;
+        }
+
+        /* BOTÕES */
+        .button {
+            margin-top: 15px;
+            margin-right: 10px;
+            background: #1f7a4c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .button:hover {
+            background: #145c36;
+        }
+
+        .button-outline {
+            background: white;
+            color: #1f7a4c;
+            border: 1px solid #1f7a4c;
+        }
+
+        .button-outline:hover {
+            background: #f0f9f2;
+        }
+
+        /* CONTAINER DE CONFIGURAÇÕES */
+        .settings-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* MENU LATERAL DE CONFIGURAÇÕES */
+        .settings-sidebar {
+            width: 260px;
+            background: #f4fbf7;
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid #d6efe1;
+        }
+
+        .settings-sidebar h3 {
+            color: #1f7a4c;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 18px;
+            border-bottom: 2px solid #cce5d5;
+            padding-bottom: 10px;
+        }
+
+        .settings-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .settings-menu li {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            color: #333;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .settings-menu li:hover {
+            background: #e0f0e6;
+        }
+
+        .settings-menu li.active {
+            background: #1f7a4c;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* CONTEÚDO DAS CONFIGURAÇÕES */
+        .settings-content {
+            flex: 1;
+            min-width: 500px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid #ddd;
+        }
+
+        .settings-section {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 25px;
+        }
+
+        .settings-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .settings-section h2 {
+            color: #1f7a4c;
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .settings-row {
+            display: flex;
+            margin-bottom: 18px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .settings-label {
+            width: 180px;
+            font-weight: 500;
+            color: #555;
+            padding-top: 8px;
+        }
+
+        .settings-field {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .settings-field input,
+        .settings-field select,
+        .settings-field textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .settings-field textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
+        .settings-help {
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* SWITCH / TOGGLE */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .3s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #1f7a4c;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* LOJAS / FILIAIS */
+        .lojas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+
+        .loja-card {
+            background: white;
+            border: 1px solid #d6efe1;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .loja-card h4 {
+            margin: 0 0 8px 0;
+            color: #1f7a4c;
+            font-size: 16px;
+        }
+
+        .loja-card p {
+            margin: 5px 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-ativo {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-inativo {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* PERMISSÕES */
+        .permissions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .permission-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .permission-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        /* TABS INTERNAS */
+        .config-tabs {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #cce5d5;
+            flex-wrap: wrap;
+        }
+
+        .config-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: #666;
+            border-radius: 8px 8px 0 0;
+            font-weight: 500;
+        }
+
+        .config-tab.active {
+            background: #f4fbf7;
+            color: #1f7a4c;
+            font-weight: bold;
+            border: 2px solid #cce5d5;
+            border-bottom-color: transparent;
+        }
+
+        /* APARÊNCIA */
+        .color-preview {
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+
+        .logo-preview {
+            width: 100px;
+            height: 100px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        /* SEÇÃO DE CONTRATO */
+        .contract-info {
+            background: #f0f9f2;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        /* LINKS DE AÇÃO */
+        .action-link {
+            color: #1f7a4c;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .action-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="logo">🏪 NOME_LOJA</div>
+    <div class="menu">
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="relatorios.html">📈 Relatórios</a>
+        <a href="usuarios.html">👤 Usuários</a>
+        <a href="clientes.html">👥 Clientes</a>
+        <a href="funcionarios.html">🧑 Funcionários</a>
+        <a href="produtos.html">📦 Produtos</a>
+        <a href="estoque.html">🏬 Estoque</a>
+        <a href="lembretes.html">🔔 Lembretes</a>
+        <a href="financeiro.html">💰 Financeiro</a>
+        <a href="servicos.html">🛠 Serviços</a>
+        <a href="configuracoes.html">⚙ Configurações</a>
+        <a href="suporte.html">🎧 Suporte</a>
+    </div>
+</div>
+
+<div class="main">
+    <div class="header">
+        <h1>⚙ Configurações</h1>
+        <p>Gerencie as configurações da sua loja, usuários e preferências</p>
+        <div>
+            <button class="button">💾 Salvar alterações</button>
+            <button class="button button-outline">↻ Restaurar padrões</button>
+        </div>
+    </div>
+
+    <!-- CONFIGURAÇÕES - LAYOUT PRINCIPAL -->
+    <div class="settings-container">
+        <!-- MENU LATERAL DE CONFIGURAÇÕES -->
+        <div class="settings-sidebar">
+            <h3>⚙ Configurações</h3>
+            <ul class="settings-menu">
+                <li class="active">🏢 Dados da empresa</li>
+                <li>🏬 Lojas / Filiais</li>
+                <li>👥 Permissões</li>
+                <li>🎨 Aparência</li>
+                <li>🔒 Segurança</li>
+                <li>💳 Contrato</li>
+                <li>📧 Notificações</li>
+                <li>📝 Backup</li>
+            </ul>
+        </div>
+
+        <!-- CONTEÚDO DAS CONFIGURAÇÕES -->
+        <div class="settings-content">
+            <!-- TABS INTERNAS -->
+            <div class="config-tabs">
+                <div class="config-tab active">Dados principais</div>
+                <div class="config-tab">Contato</div>
+                <div class="config-tab">Endereço</div>
+                <div class="config-tab">Documentos</div>
+            </div>
+
+            <!-- SEÇÃO: DADOS DA EMPRESA -->
+            <div class="settings-section">
+                <h2>🏢 Dados da empresa</h2>
+                
+                <div class="settings-row">
+                    <div class="settings-label">Nome da empresa:</div>
+                    <div class="settings-field">
+                        <input type="text" value="NOME_LOJA" placeholder="Nome da empresa">
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <div class="settings-label">Nome fantasia:</div>
+                    <div class="settings-field">
+                        <input type="text" value="NOME_LOJA" placeholder="Nome fantasia">
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <div class="settings-label">CNPJ / CPF:</div>
+                    <div class="settings-field">
+                        <input type="text" value="12.345.678/0001-90" placeholder="00.000.000/0000-00">
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <div class="settings-label">Inscrição estadual:</div>
+                    <div class="settings-field">
+                        <input type="text" value="123.456.789" placeholder="IE">
+                        <div class="settings-help">Opcional para MEI</div>
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <div class="settings-label">Telefone:</div>
+                    <div class="settings-field">
+                        <input type="text" value="(51) 3333-4444" placeholder="(00) 0000-0000">
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <div class="settings-label">E-mail:</div>
+                    <div class="settings-field">
+                        <input type="email" value="contato@nomeloja.com.br" placeholder="contato@empresa.com">
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <div class="settings-label">Site:</div>
+                    <div class="settings-field">
+                        <input type="text" value="www.nomeloja.com.br" placeholder="www.empresa.com.br">
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <div class="settings-label">Tipo de negócio:</div>
+                    <div class="settings-field">
+                        <select>
+                            <option>Varejo</option>
+                            <option>Atacado</option>
+                            <option>Serviços</option>
+                            <option>Misto</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO: LOJAS / FILIAIS -->
+            <div class="settings-section">
+                <h2>🏬 Lojas / Filiais</h2>
+                <p style="color: #666; margin-bottom: 15px;">Gerencie as lojas vinculadas à sua conta</p>
+                
+                <button class="button button-outline" style="margin-top: 0; margin-bottom: 20px;">+ Adicionar nova loja</button>
+                
+                <div class="lojas-grid">
+                    <div class="loja-card">
+                        <h4>Matriz - Centro</h4>
+                        <p><strong>Endereço:</strong> Rua das Flores, 123 - Centro</p>
+                        <p><strong>Telefone:</strong> (51) 3333-1111</p>
+                        <p><strong>Gerente:</strong> João Silva</p>
+                        <p><span class="status-badge status-ativo">Ativa</span></p>
+                        <p style="margin-top: 10px;">
+                            <a href="#" class="action-link">Editar</a> | 
+                            <a href="#" class="action-link" style="color: #d9534f;">Desativar</a>
+                        </p>
+                    </div>
+                    
+                    <div class="loja-card">
+                        <h4>Filial Zona Sul</h4>
+                        <p><strong>Endereço:</strong> Av. Wenceslau, 456 - Nonoai</p>
+                        <p><strong>Telefone:</strong> (51) 3333-2222</p>
+                        <p><strong>Gerente:</strong> Maria Oliveira</p>
+                        <p><span class="status-badge status-ativo">Ativa</span></p>
+                        <p style="margin-top: 10px;">
+                            <a href="#" class="action-link">Editar</a> | 
+                            <a href="#" class="action-link" style="color: #d9534f;">Desativar</a>
+                        </p>
+                    </div>
+                    
+                    <div class="loja-card">
+                        <h4>Filial Gravataí</h4>
+                        <p><strong>Endereço:</strong> Av. Dorival, 789 - Centro</p>
+                        <p><strong>Telefone:</strong> (51) 3333-3333</p>
+                        <p><strong>Gerente:</strong> Carlos Souza</p>
+                        <p><span class="status-badge status-ativo">Ativa</span></p>
+                        <p style="margin-top: 10px;">
+                            <a href="#" class="action-link">Editar</a> | 
+                            <a href="#" class="action-link" style="color: #d9534f;">Desativar</a>
+                        </p>
+                    </div>
+                    
+                    <div class="loja-card">
+                        <h4>Nova filial</h4>
+                        <p><strong>Endereço:</strong> A definir</p>
+                        <p><strong>Telefone:</strong> -</p>
+                        <p><strong>Gerente:</strong> -</p>
+                        <p><span class="status-badge status-inativo">Inativa</span></p>
+                        <p style="margin-top: 10px;">
+                            <a href="#" class="action-link">Editar</a> | 
+                            <a href="#" class="action-link">Ativar</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <div class="settings-label">Loja padrão:</div>
+                    <div class="settings-field">
+                        <select>
+                            <option>Matriz - Centro</option>
+                            <option>Filial Zona Sul</option>
+                            <option>Filial Gravataí</option>
+                            <option>Última loja acessada</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO: PERMISSÕES -->
+            <div class="settings-section">
+                <h2>👥 Permissões</h2>
+                <p style="color: #666; margin-bottom: 15px;">Defina o que cada tipo de usuário pode fazer</p>
+                
+                <div style="margin-bottom: 20px;">
+                    <select style="padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+                        <option>Administrador</option>
+                        <option>Gerente</option>
+                        <option>Funcionário</option>
+                        <option>Supervisor</option>
+                    </select>
+                </div>
+                
+                <div class="permissions-grid">
+                    <div class="permission-item">
+                        <input type="checkbox" id="perm1" checked>
+                        <label for="perm1">Acessar dashboard</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="perm2" checked>
+                        <label for="perm2">Ver relatórios</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="perm3">
+                        <label for="perm3">Gerenciar usuários</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="perm4">
+                        <label for="perm4">Permitir descontos</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="perm5" checked>
+                        <label for="perm5">Ajustar estoque</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="perm6" checked>
+                        <label for="perm6">Cadastrar produtos</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="perm7">
+                        <label for="perm7">Ver financeiro</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="perm8">
+                        <label for="perm8">Acessar todas as lojas</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="perm9">
+                        <label for="perm9">Cadastrar funcionários</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="perm10">
+                        <label for="perm10">Cancelar vendas</label>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 15px; color: #888; font-size: 13px;">
+                    ⚠️ Permissões podem ser ajustadas individualmente para cada usuário
+                </p>
+            </div>
+
+            <!-- SEÇÃO: APARÊNCIA -->
+            <div class="settings-section">
+                <h2>🎨 Aparência</h2>
+                
+                <div class="settings-row">
+                    <div class="settings-label">Nome do sistema:</div>
+                    <div class="settings-field">
+                        <input type="text" value="NOME_LOJA">
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <div class="settings-label">Logo da loja:</div>
+                    <div class="settings-field">
+                        <button class="button button-outline" style="margin-top: 0;">📁 Enviar imagem</button>
+                        <div class="logo-preview">
+                            [Logo]
+                        </div>
+                        <div class="settings-help">Tamanho recomendado: 200x200px</div>
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <div class="settings-label">Cor principal:</div>
+                    <div class="settings-field">
+                        <input type="color" value="#1f7a4c" style="width: 60px; height: 40px;">
+                        <span class="color-preview" style="background: #1f7a4c;"></span> #1f7a4c
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <div class="settings-label">Cor de destaque:</div>
+                    <div class="settings-field">
+                        <input type="color" value="#145c36" style="width: 60px; height: 40px;">
+                        <span class="color-preview" style="background: #145c36;"></span> #145c36
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <div class="settings-label">Tema:</div>
+                    <div class="settings-field">
+                        <select>
+                            <option>Claro</option>
+                            <option>Escuro</option>
+                            <option>Automático</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO: CONTRATO -->
+            <div class="settings-section">
+                <h2>💳 Contrato</h2>
+                
+                <div class="contract-info">
+                    <div class="settings-row">
+                        <div class="settings-label">Situação:</div>
+                        <div class="settings-field">
+                            <span style="background: #d4edda; color: #155724; padding: 5px 12px; border-radius: 20px;">✅ Ativo</span>
+                            <span style="margin-left: 15px;">Válido até 28/02/2027</span>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-row">
+                        <div class="settings-label">Plano:</div>
+                        <div class="settings-field">
+                            <strong>Profissional</strong> - R$ 197,00/mês
+                        </div>
+                    </div>
+                    
+                    <div class="settings-row">
+                        <div class="settings-label">Bloquear inadimplência:</div>
+                        <div class="settings-field">
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span style="margin-left: 10px;">Bloquear automaticamente</span>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-row">
+                        <div class="settings-label">Próxima cobrança:</div>
+                        <div class="settings-field">
+                            15/03/2026
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 15px;">
+                        <button class="button button-outline">📄 Ver detalhes do contrato</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO: NOTIFICAÇÕES -->
+            <div class="settings-section">
+                <h2>📧 Notificações</h2>
+                
+                <div class="permissions-grid">
+                    <div class="permission-item">
+                        <input type="checkbox" id="notif1" checked>
+                        <label for="notif1">Estoque baixo</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="notif2" checked>
+                        <label for="notif2">Vendas do dia</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="notif3" checked>
+                        <label for="notif3">Contas a pagar</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="notif4">
+                        <label for="notif4">Novos clientes</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="notif5" checked>
+                        <label for="notif5">Lembretes</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="notif6">
+                        <label for="notif6">Atualizações do sistema</label>
+                    </div>
+                </div>
+                
+                <div class="settings-row" style="margin-top: 15px;">
+                    <div class="settings-label">E-mail para alertas:</div>
+                    <div class="settings-field">
+                        <input type="email" value="admin@nomeloja.com.br">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO: BACKUP -->
+            <div class="settings-section">
+                <h2>📝 Backup</h2>
+                
+                <div class="settings-row">
+                    <div class="settings-label">Último backup:</div>
+                    <div class="settings-field">
+                        09/03/2026 às 03:00
+                        <button class="button button-outline" style="margin-left: 15px; margin-top: 0;">Fazer backup agora</button>
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <div class="settings-label">Backup automático:</div>
+                    <div class="settings-field">
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span style="margin-left: 10px;">Diário às 03:00</span>
+                    </div>
+                </div>
+                
+                <div class="settings-row">
+                    <div class="settings-label">Histórico:</div>
+                    <div class="settings-field">
+                        <a href="#" class="action-link">Ver logs de acesso</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <div style="margin-top: 40px; font-size: 13px; color: #aaa; text-align: center; border-top: 1px dashed #ccc; padding-top: 15px;">
+        ⏱️ Última atualização: hoje, 10:23 · Configurações da empresa
+    </div>
+</div>
+
+</body>
+</html>

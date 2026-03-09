@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>NOME_LOJA - Funcionários</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { margin:0; font-family:Arial, Helvetica, sans-serif; background:#ffffff; color:#333; }
+        .sidebar { width:230px; height:100vh; background:#1f7a4c; position:fixed; padding:20px; color:white; overflow:auto; }
+        .logo { font-size:22px; font-weight:bold; margin-bottom:30px; }
+        .menu a { display:block; color:#e8f5ec; text-decoration:none; padding:12px; border-radius:6px; margin-bottom:6px; font-size:15px; }
+        .menu a:hover { background:#145c36; }
+        .main { margin-left:250px; padding:30px; }
+        .header h1 { font-size:30px; color:#1f7a4c; }
+        .header p { color:#666; }
+        .button { margin-top:15px; background:#1f7a4c; color:white; border:none; padding:10px 18px; border-radius:6px; cursor:pointer; }
+        .button:hover { background:#145c36; }
+        .search { margin-top:20px; padding:10px; width:300px; border-radius:6px; border:1px solid #ccc; }
+        .cards { margin-top:30px; display:flex; gap:20px; flex-wrap:wrap; }
+        .card { flex:1; min-width:220px; background:#f4fbf7; padding:20px; border-radius:10px; border:1px solid #d6efe1; }
+        .card h3 { margin:0; color:#1f7a4c; }
+        .card .value { font-size:24px; margin-top:10px; font-weight:bold; }
+        .table { margin-top:30px; border:1px solid #ddd; border-radius:10px; overflow:hidden; }
+        table { width:100%; border-collapse:collapse; }
+        th, td { padding:12px; border-bottom:1px solid #eee; text-align:left; }
+        th { background:#f4fbf7; color:#1f7a4c; }
+        .status-active { color:#27ae60; }
+        .status-inactive { color:#d9534f; }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <div class="logo">🏪 NOME_LOJA</div>
+    <div class="menu">
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="relatorios.html">📈 Relatórios</a>
+        <a href="usuarios.html">👤 Usuários</a>
+        <a href="clientes.html">👥 Clientes</a>
+        <a href="funcionarios.html">🧑 Funcionários</a>
+        <a href="produtos.html">📦 Produtos</a>
+        <a href="estoque.html">🏬 Estoque</a>
+        <a href="lembretes.html">🔔 Lembretes</a>
+        <a href="financeiro.html">💰 Financeiro</a>
+        <a href="servicos.html">🛠 Serviços</a>
+        <a href="configuracoes.html">⚙ Configurações</a>
+        <a href="suporte.html">🎧 Suporte</a>
+    </div>
+</div>
+<div class="main">
+    <div class="header">
+        <h1>🧑 Funcionários</h1>
+        <p>Gerencie os funcionários e suas atividades</p>
+        <button class="button">+ Cadastrar funcionário</button>
+        <input class="search" placeholder="Buscar por nome">
+    </div>
+    <div class="cards">
+        <div class="card"><h3>Total de funcionários</h3><div class="value">8</div></div>
+        <div class="card"><h3>Ativos</h3><div class="value">7</div></div>
+        <div class="card"><h3>Vendas hoje</h3><div class="value">34</div></div>
+    </div>
+    <div class="table">
+        <table>
+            <tr><th>Nome</th><th>Cargo</th><th>Loja</th><th>Status</th><th>Vendas hoje</th><th></th></tr>
+            <tr><td>Maria</td><td>Funcionário</td><td>Matriz</td><td class="status-active">Ativo</td><td>5</td><td>Editar</td></tr>
+            <tr><td>Carlos</td><td>Funcionário</td><td>Filial</td><td class="status-active">Ativo</td><td>3</td><td>Editar</td></tr>
+            <tr><td>João</td><td>Gerente</td><td>Matriz</td><td class="status-active">Ativo</td><td>2</td><td>Editar</td></tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

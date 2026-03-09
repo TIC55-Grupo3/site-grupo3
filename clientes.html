@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>NOME_LOJA - Clientes</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { margin:0; font-family:Arial, Helvetica, sans-serif; background:#ffffff; color:#333; }
+        .sidebar { width:230px; height:100vh; background:#1f7a4c; position:fixed; padding:20px; color:white; overflow:auto; }
+        .logo { font-size:22px; font-weight:bold; margin-bottom:30px; }
+        .menu a { display:block; color:#e8f5ec; text-decoration:none; padding:12px; border-radius:6px; margin-bottom:6px; font-size:15px; }
+        .menu a:hover { background:#145c36; }
+        .main { margin-left:250px; padding:30px; }
+        .header h1 { font-size:30px; color:#1f7a4c; }
+        .header p { color:#666; }
+        .button { margin-top:15px; background:#1f7a4c; color:white; border:none; padding:10px 18px; border-radius:6px; cursor:pointer; }
+        .button:hover { background:#145c36; }
+        .search { margin-top:20px; padding:10px; width:300px; border-radius:6px; border:1px solid #ccc; }
+        .cards { margin-top:30px; display:flex; gap:20px; flex-wrap:wrap; }
+        .card { flex:1; min-width:220px; background:#f4fbf7; padding:20px; border-radius:10px; border:1px solid #d6efe1; }
+        .card h3 { margin:0; color:#1f7a4c; }
+        .card .value { font-size:24px; margin-top:10px; font-weight:bold; }
+        .table { margin-top:30px; border:1px solid #ddd; border-radius:10px; overflow:hidden; }
+        table { width:100%; border-collapse:collapse; }
+        th, td { padding:12px; border-bottom:1px solid #eee; text-align:left; }
+        th { background:#f4fbf7; color:#1f7a4c; }
+        .action-link { color:#1f7a4c; text-decoration:none; }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <div class="logo">🏪 NOME_LOJA</div>
+    <div class="menu">
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="relatorios.html">📈 Relatórios</a>
+        <a href="usuarios.html">👤 Usuários</a>
+        <a href="clientes.html">👥 Clientes</a>
+        <a href="funcionarios.html">🧑 Funcionários</a>
+        <a href="produtos.html">📦 Produtos</a>
+        <a href="estoque.html">🏬 Estoque</a>
+        <a href="lembretes.html">🔔 Lembretes</a>
+        <a href="financeiro.html">💰 Financeiro</a>
+        <a href="servicos.html">🛠 Serviços</a>
+        <a href="configuracoes.html">⚙ Configurações</a>
+        <a href="suporte.html">🎧 Suporte</a>
+    </div>
+</div>
+<div class="main">
+    <div class="header">
+        <h1>👥 Clientes</h1>
+        <p>Gerencie os clientes da sua loja</p>
+        <button class="button">+ Cadastrar cliente</button>
+        <input class="search" placeholder="Buscar por nome, CPF ou telefone">
+    </div>
+    <div class="cards">
+        <div class="card"><h3>Total de clientes</h3><div class="value">157</div></div>
+        <div class="card"><h3>Compraram este mês</h3><div class="value">43</div></div>
+        <div class="card"><h3>Clientes novos</h3><div class="value">12</div></div>
+    </div>
+    <div class="table">
+        <table>
+            <tr><th>Nome</th><th>Telefone</th><th>Cidade</th><th>Total comprado</th><th>Última compra</th><th></th></tr>
+            <tr><td>João Silva</td><td>(51) 99999-9999</td><td>Porto Alegre</td><td>R$ 350,00</td><td>10/03/2026</td><td><a href="#" class="action-link">Ver histórico</a></td></tr>
+            <tr><td>Maria Oliveira</td><td>(51) 98888-8888</td><td>Canoas</td><td>R$ 120,00</td><td>05/03/2026</td><td><a href="#" class="action-link">Ver histórico</a></td></tr>
+            <tr><td>Carlos Souza</td><td>(51) 97777-7777</td><td>Gravataí</td><td>R$ 890,00</td><td>01/03/2026</td><td><a href="#" class="action-link">Ver histórico</a></td></tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
